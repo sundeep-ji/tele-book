@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en"
+      th:replace="user/userbase::template(~{::title}, ~{::div})"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${title} + ' Page : Tele-Book'"></title>
+</head>
+<body>
+<div>
+    <!-- Content Section -->
+    <section id="content">
+        <!-- flex container -->
+        <div class="container flex flex-col mb-7 items-center px-4 mx-auto space-y-0 md:space-y-0 my-16 md:my-20">
+
+            <div class="flex flex-col mb-8 space-y-3 md:w-2/3">
+                <h1 class="w-full text-2xl font-bold text-center md:text-4xl">
+                    Update Contact
+                </h1>
+            </div>
+
+            <!-- Error or success message -->
+            <div class="flex flex-row justify-between alert"
+                 id="message_box"
+                 th:classappend="'alert-' + ${session.message.type} + ' text-' + ${session.message.type}"
+                 th:if="${session.message}">
+                <span th:text="${session.message.content}"></span>
+                <th:block th:text="${#session.removeAttribute('message')}"></th:block>
+                <div class="cursor-pointer" onclick="message_close()">
+                    <iconify-icon class="text-2xl" icon="ci:close-big"/>
+                </div>
+            </div>
+
+            <!-- Update Contact Form -->
+            <div class="flex flex-col mb-7 w-3/4 rounded-lg space-y-3 md:w-2/3 md:mx-auto bg-[#F0EFEE]"
+                 th:object="${contact}">
+                <form class="flex flex-col p-6 mx-auto w-full rounded-lg space-y-3 md:space-y-6 md:w-4/5"
+                      enctype="multipart/form-data"
+                      method="post"
+                      th:action="@{/people/updates}">
+                    <h1 class="text-xl font-bold text-center md:text-2xl">Enter Contact Details</h1>
+                    <input id="id" name="id" th:value="${contact.id}" type="hidden">
+                    <div>
+                        <img alt=""
+                             class="w-1/3 mx-auto rounded-full shadow-sm"
+                             th:src="@{'/img/contact_img/' + ${user.id} + '_' + ${contact.avatar}}">
+                    </div>
+
+                    <!-- name -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700" for="name">Name</label>
+                        <input autocomplete="name" class="w-full rounded-lg shadow-sm" id="name" name="name" required
+                               th:classappend="${#fields.hasErrors('name')
+                               ?'border-pink-500 text-pink-600 focus:border-pink-500 focus:ring-pink-500'
+                               :'border-gray-300 focus:border-blue focus:ring-blue'}"
+                               th:value="${contact.name}"
+                               type="text">
+                        <div class="text-pink-600"
+                             th:each="e: ${#fields.errors('name')}">
+                            <span th:text="${e}"/>
+                        </div>
+                    </div>
+
+                    <!-- phone number -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700" for="phone_number">Phone Number</label>
+                        <input autocomplete="phone-number" class="w-full rounded-lg shadow-sm" id="phone_number"
+                               name="phone" required
+                               th:classappend="${#fields.hasErrors('phone')
+                               ?'border-pink-500 text-pink-600 focus:border-pink-500 focus:ring-pink-500'
+                               :'border-gray-300 focus:border-blue focus:ring-blue'}"
+                               th:value="${contact.phone}"
+                               type="text">
+                        <div class="text-pink-600"
+                             th:each="e: ${#fields.errors('phone')}">
+                            <span th:text="${e}"/>
+                        </div>
+                    </div>
+
+                    <!-- email-address -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700" for="email">Email-Address</label>
+                        <input autocomplete="email"
+                               class="w-full border-gray-300 rounded-lg shadow-sm focus:border-blue focus:ring-blue"
+                               id="email" name="email" required
+                               th:value="${contact.email}"
+                               type="email">
+                    </div>
+
+                    <!-- work details -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700" for="work">Work</label>
+                        <input autocomplete="work"
+                               class="w-full border-gray-300 rounded-lg shadow-sm focus:border-blue focus:ring-blue"
+                               id="work" name="work" required
+                               th:value="${contact.work}"
+                               type="text">
+                    </div>
+
+                    <!-- image file -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700" for="image">Choose Image</label>
+                        <input accept=".jpg, .jpeg, .png"
+                               class="w-full file:bg-darkblue file:text-white file:p-2 file:text-center file:rounded-md file:px-4 file:border-none cursor-pointer bg-white rounded-md shadow-sm"
+                               id="image" name="profile"
+                               type="file">
+                    </div>
+
+                    <!-- submit button -->
+                    <div class="flex flex-row space-x-3 w-full">
+                        <button class="w-1/2 flex justify-center py-2 px-4 mb-3 border border-transparent rounded-lg shadow-sm text-sm font-bold text-white bg-blue hover:bg-darkblue"
+                                type="submit">
+                            Update Contact
+                        </button>
+                        <a class="w-1/2 text-center py-2 px-4 mb-3 border border-transparent rounded-lg shadow-sm text-sm font-bold text-white bg-contactreddark hover:bg-contactred"
+                           th:href="@{/user/show}">Cancel
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+</div>
+</body>
+</html>

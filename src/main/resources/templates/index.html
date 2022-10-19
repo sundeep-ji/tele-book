@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en"
+      th:replace="base::template(~{::title}, ~{::div})"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${title} + ' Page : Tele-Book'"></title>
+</head>
+<body>
+<div>
+    <!-- Content Section -->
+    <section id="content">
+        <!-- flex container -->
+        <div
+                class="container flex flex-col-reverse items-center px-4 mx-auto mt-16 space-y-0 md:flex-row md:space-y-0 md:mt-36">
+            <!-- left item -->
+            <div class="flex flex-col mb-16 space-y-12 md:w-1/2">
+                <h1 class="max-w-md text-4xl font-bold text-center md:text-5xl md:text-left">
+                    build your own book to keep memory with whom you connect
+                </h1>
+                <p class="max-w-sm text-center md:text-left text-slate-700">
+                    Tele-Book Provide you with a smart way to manage your contacts
+                </p>
+                <div class="flex justify-center md:justify-start">
+                    <a class="rounded-full bg-blue baseline p-2 text-xl w-[180px] font-bold text-center text-white hover:bg-darkblue"
+                       th:href="@{/signup}">Get
+                        Started</a>
+                </div>
+            </div>
+            <!-- Image -->
+            <div class="md:w-1/2">
+                <img alt="" class="rounded-full mx-auto w-[200px] mb-4 md:mb-16 md:w-[300px]" src="img/avatar.png">
+            </div>
+            <!-- background svg -->
+            <div class="absolute top-72 rotate-[34deg] -z-10 -left-52
+            md:top-32 md:rotate-[39deg] md:-z-10 md:-left-24">
+                <iconify-icon class="text-[500px]" icon="bxs:contact" style="color: #f0d8b63d;"></iconify-icon>
+            </div>
+        </div>
+    </section>
+    <!-- about section -->
+    <section class="bg-skin" id="info">
+        <!-- flex container -->
+        <div
+                class="container flex flex-col items-center justify-between px-16 py-20 mx-auto space-y-12 md:flex-row md:space-y-0">
+            <!-- heading -->
+            <h2 class="text-3xl font-bold text-center md:text-4xl md:max-w-xl md:text-left">
+                To Know more about Tele-Book
+            </h2>
+            <!-- button -->
+            <div class="flex justify-center md:justify-start">
+                <a class="rounded-full bg-blue text-white baseline p-2 text-xl w-[180px] font-bold text-center hover:bg-darkblue cursor-pointer"
+                   th:href="@{/about}">Click
+                    Here</a>
+            </div>
+        </div>
+    </section>
+</div>
+</body>
+</html>

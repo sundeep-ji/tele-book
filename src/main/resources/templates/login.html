@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en"
+      th:replace="base::template(~{::title}, ~{::div})"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${title} + ' Page : Tele-Book'"></title>
+</head>
+<body>
+<div>
+    <section id="content">
+        <!-- flex container -->
+        <div class="container flex flex-col mb-7 items-center px-4 mx-auto space-y-0 md:flex-row md:space-y-0 my-16 md:my-32">
+            <!-- left item -->
+            <div class="flex flex-col mb-8 space-y-3 md:w-1/2">
+                <h1 class="max-w-md text-4xl font-bold text-center md:text-5xl">
+                    Welcome Back !
+                </h1>
+                <h2 class="max-w-md text-3xl font-bold text-center md:text-4xl">
+                    Login to your account
+                </h2>
+            </div>
+            <!-- Login Form -->
+            <div class="flex flex-col mb-7 space-y-3 md:w-1/3 md:mx-auto">
+                <form class="flex flex-col p-6 w-full rounded-xl space-y-6 bg-[#F0EFEE]" method="post"
+                      th:action="@{/login}">
+                    <h1 class="max-w-md text-2xl font-bold text-center md:text-2xl">Enter your details</h1>
+
+                    <div class="flex flex-row justify-between alert alert-error text-error"
+                         id="message_box"
+                         role="alert"
+                         th:if="${param.error}">
+                        <p>Invalid Username or Password!!</p>
+                        <div class="cursor-pointer" onclick="message_close()">
+                            <iconify-icon class="text-2xl" icon="ci:close-big"/>
+                        </div>
+                    </div>
+
+                    <!-- email-address -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 after:content-['*'] after:ml-0.5 after:text-red-500"
+                               for="email">Email-Address</label>
+                        <input autocomplete="email"
+                               class="w-full border-gray-300 rounded-lg shadow-sm focus:border-blue focus:ring-blue"
+                               id="email" name="username" required
+                               type="email">
+                    </div>
+
+                    <!-- password details -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 after:content-['*'] after:ml-0.5 after:text-red-500"
+                               for="password">Password</label>
+                        <input autocomplete="password"
+                               class="w-full border-gray-300 rounded-lg shadow-sm focus:border-blue focus:ring-blue"
+                               id="password" name="password" required
+                               type="password">
+                    </div>
+
+                    <!-- submit button -->
+                    <div>
+                        <button class="w-full flex justify-center py-2 px-4 border border-transparent rounded-lg shadow-sm text-sm font-bold text-white bg-blue hover:bg-darkblue"
+                                type="submit">
+                            Login
+                        </button>
+                    </div>
+
+                    <!-- signup -->
+                    <div class="flex flex-row w-full justify-center">
+                        <p class="text-sm">New User ? <a class="text-aboutbluedark" th:href="@{/signup}">Sign
+                            Up</a></p>
+                    </div>
+                </form>
+            </div>
+
+            <!-- background svg -->
+            <div class="hidden absolute top-72 rotate-[34deg] -z-10 -left-52
+            md:block md:top-32 md:rotate-[39deg] md:-z-10 md:-left-24">
+                <iconify-icon class="text-[500px]" icon="bxs:contact" style="color: #464f6010;"></iconify-icon>
+            </div>
+        </div>
+    </section>
+</div>
+</body>
+</html>

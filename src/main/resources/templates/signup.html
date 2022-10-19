@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en"
+      th:replace="base::template(~{::title}, ~{::div})"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${title} + ' Page : Tele-Book'"></title>
+</head>
+<body>
+<div>
+    <!-- Content Section -->
+    <section id="content">
+        <!-- flex container -->
+        <div class="container flex flex-col mb-7 items-center px-4 mx-auto space-y-0 md:space-y-0 my-16 md:my-20">
+            <!-- left item -->
+            <div class="flex flex-col mb-8 space-y-3 md:w-2/3">
+                <h1 class="w-full text-3xl font-bold text-center md:text-4xl">
+                    Welcome to Tel-Book !
+                </h1>
+            </div>
+            <!-- signup Form -->
+            <div class="flex flex-col mb-7 w-3/4 rounded-lg space-y-3 md:w-2/3 md:mx-auto bg-[#F0EFEE]">
+                <form class="flex flex-col p-6 mx-auto rounded-lg space-y-4 md:space-y-6 md:w-4/5"
+                      method="post" th:action="@{/register}"
+                      th:object="${user}">
+                    <h1 class="text-xl font-bold text-center md:text-2xl">Register your details</h1>
+
+                    <!-- Error or success message -->
+                    <div class="flex flex-row justify-between alert"
+                         id="message_box"
+                         th:classappend="'alert-' + ${session.message.type} + ' text-' + ${session.message.type}"
+                         th:if="${session.message}">
+                        <span th:text="${session.message.content}"></span>
+                        <th:block th:text="${#session.removeAttribute('message')}"></th:block>
+                        <div class="cursor-pointer" onclick="message_close()">
+                            <iconify-icon class="text-2xl" icon="ci:close-big"/>
+                        </div>
+                    </div>
+
+                    <!-- name -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 after:content-['*'] after:ml-0.5 after:text-red-500"
+                               for="name">Name</label>
+                        <input autocomplete="name" class="w-full rounded-lg shadow-sm" id="name" name="name"
+                               th:classappend="${#fields.hasErrors('name')
+                               ?'border-pink-500 text-pink-600 focus:border-pink-500 focus:ring-pink-500'
+                               :'border-gray-300 focus:border-blue focus:ring-blue'}"
+                               th:value="${user.name}"
+                               type="text">
+                        <div class="text-pink-600"
+                             th:each="e: ${#fields.errors('name')}">
+                            <span th:text="${e}"/>
+                        </div>
+                    </div>
+
+                    <!-- email-address -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 after:content-['*'] after:ml-0.5 after:text-red-500"
+                               for="email">Email-Address</label>
+                        <input autocomplete="email" class="w-full rounded-lg shadow-sm" id="email" name="email"
+                               th:classappend="${#fields.hasErrors('email')
+                               ?'border-pink-500 text-pink-600 focus:border-pink-500 focus:ring-pink-500'
+                               :'border-gray-300 focus:border-blue focus:ring-blue'}"
+                               th:value="${user.email}"
+                               type="email">
+                        <div class="text-pink-600"
+                             th:each="e: ${#fields.errors('email')}">
+                            <span th:text="${e}"/>
+                        </div>
+                    </div>
+
+                    <!-- password details -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 after:content-['*'] after:ml-0.5 after:text-red-500"
+                               for="password">Password</label>
+                        <input autocomplete="password" class="w-full rounded-lg shadow-sm" id="password" name="password"
+                               th:classappend="${#fields.hasErrors('password')
+                               ?'border-pink-500 text-pink-600 focus:border-pink-500 focus:ring-pink-500'
+                               :'border-gray-300 focus:border-blue focus:ring-blue'}"
+                               th:value="${user.password}"
+                               type="password">
+                        <div class="text-pink-600"
+                             th:each="e: ${#fields.errors('password')}">
+                            <span th:text="${e}"/>
+                        </div>
+                    </div>
+
+                    <!-- confirm password details -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 after:content-['*'] after:ml-0.5 after:text-red-500"
+                               for="rePassword">Confirm
+                            Password</label>
+                        <input autocomplete="rePassword" class="w-full rounded-lg shadow-sm" id="rePassword" name="rePassword"
+                               th:classappend="${#fields.hasErrors('rePassword')
+                               ?'border-pink-500 text-pink-600 focus:border-pink-500 focus:ring-pink-500'
+                               :'border-gray-300 focus:border-blue focus:ring-blue'}"
+                               th:value="${user.rePassword}"
+                               type="password">
+                        <div class="text-pink-600"
+                             th:each="e: ${#fields.errors('rePassword')}">
+                            <span th:text="${e}"/>
+                        </div>
+                    </div>
+
+                    <!-- terms and conditions -->
+                    <div class="flex w-full">
+                        <input class="m-1 rounded" id="terms-and-conditions" name="terms" th:classappend="${#fields.hasErrors('terms')
+                               ?'border-pink-500 text-pink-600 focus:border-pink-500 focus:ring-pink-500'
+                               :'border-gray-300 focus:border-blue focus:ring-blue text-blue'}"
+                               type="checkbox">
+                        <div class="flex flex-col">
+                            <label class="ml-1 block text-sm" for="terms-and-conditions"
+                                   name="terms"
+                                   th:classappend="${#fields.hasErrors('terms')?'text-pink-600':'text-gray-700'}">
+                                I agree to the terms & conditions.
+                            </label>
+                            <div class="text-pink-600 text-sm"
+                                 th:each="e: ${#fields.errors('terms')}">
+                                <span th:text="${e}"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- submit button -->
+                    <div>
+                        <button class="w-full flex justify-center py-2 px-4 border border-transparent rounded-lg shadow-sm text-sm font-bold text-white bg-blue hover:bg-darkblue"
+                                type="submit">
+                            Sign Up
+                        </button>
+                    </div>
+
+                    <!-- login -->
+                    <div class="flex flex-col text-center md:justify-center md:space-x-1 text-sm md:flex-row">
+                        <span>Already Have an Account.</span>
+                        <a class="text-aboutbluedark" th:href="@{/login}">Click Here to Login</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+</div>
+</body>
+</html>

@@ -1,0 +1,64 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+@layer components {
+    body {
+        @apply m-0 p-0 transition-all duration-[0.25ms]
+    }
+
+    /* hamburger */
+    .hamburger {
+        @apply relative right-0 w-6 h-6 cursor-pointer transition-all duration-200
+    }
+
+    .hamburger-item {
+        @apply absolute left-0 w-6 h-0.5 bg-black rotate-0 transition-all duration-200
+    }
+
+    .hamburger-top {
+        @apply top-0
+    }
+
+    .hamburger-middle {
+        @apply top-[7px]
+    }
+
+    .hamburger-bottom {
+        @apply top-[14px]
+    }
+
+    .open {
+        @apply rotate-90
+    }
+
+    .open .hamburger-top {
+        @apply rotate-45 translate-y-[7px]
+    }
+
+    .open .hamburger-middle {
+        @apply hidden
+    }
+
+    .open .hamburger-bottom {
+        @apply rotate-[-45deg] translate-y-[-7px]
+    }
+
+    .alert {
+        @apply flex flex-row justify-between border-2 p-2 rounded-md shadow-sm;
+    }
+
+    .alert-success {
+        @apply bg-[#d1e7dd] border-[#badbcc]
+    }
+
+    .alert-error {
+        @apply bg-[#f8d7da] border-[#f5c2c7]
+    }
+}
+
+/*.alert-success{*/
+/*    background-color: #d1e7dd;*/
+/*    border: #badbcc;*/
+/*    color: #0f5132;*/
+/*}*/

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en"
+      th:fragment="template(titles, content)"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title th:replace="${titles}"></title>
+    <link rel="stylesheet" th:href="@{/css/main.css}">
+</head>
+<body>
+
+<!-- navbar -->
+<nav class="w-full mx-auto fixed left-0 top-0" id="navbar">
+    <!-- flex container -->
+    <div class="flex p-3 items-center justify-between md:justify-around backdrop-blur-md bg-white/30 ">
+        <!-- Left wing -->
+        <div class="hidden md:flex space-x-16 lg:space-x-36 text-sm justify-start font-bold">
+            <a class="px-4 py-1 hover:bg-darkblue hover:text-white hover:rounded-full" th:href="@{/}">Home</a>
+            <a class="px-4 py-1 hover:bg-darkblue hover:text-white hover:rounded-full" th:href="@{/about}">About
+                Us</a>
+        </div>
+        <!-- Logo -->
+        <div class="pt-1 flex text-xl md:text-2xl justify-start md:justify-center cursor-pointer">
+            <iconify-icon class="pt-1 mx-2" icon="bxs:contact"></iconify-icon>
+            <a th:href="@{/}">
+                <p class="font-bold">Tele-Book</p>
+            </a>
+        </div>
+        <!-- right wing -->
+        <div class="hidden md:flex space-x-16 lg:space-x-36 text-sm justify-end font-bold">
+            <a class="px-4 py-1 hover:bg-darkblue hover:text-white hover:rounded-full" th:href="@{/contact}">Contact
+                Us</a>
+            <a class="px-4 py-1 hover:bg-darkblue hover:text-white hover:rounded-full" th:href="@{/login}">Login</a>
+        </div>
+    </div>
+    <!-- mobile menu -->
+    <div>
+        <div class="md:hidden">
+            <!-- hamburger icon -->
+            <button class="absolute top-5 right-10 hamburger z-10 md:hidden focus:outline-none " id="menu-btn">
+                <span class="hamburger-item hamburger-top"></span>
+                <span class="hamburger-item hamburger-middle"></span>
+                <span class="hamburger-item hamburger-bottom"></span>
+            </button>
+
+            <div class="absolute flex-col w-full h-screen z-1 item-center hidden self-end top-0 p-7 space-y-6 backdrop-blur-lg bg-white/30 font-bold sm:self-center
+                left-0" id="menu">
+                <div class="flex text-xl md:text-2xl justify-start md:justify-center">
+                    <a class="cursor-pointer" href="@{/}">
+                        <iconify-icon class="pt-1 mx-2" icon="bxs:contact"></iconify-icon>
+                        <p class="font-bold">Tele-Book</p>
+                    </a>
+                </div>
+                <hr>
+                <a class="mx-2 py-2 px-4  rounded-full hover:bg-darkblue hover:text-white" th:href="@{/}">Home</a>
+                <a class="mx-2 py-2 px-4 rounded-full hover:bg-darkblue hover:text-white" th:href="@{/about}">About
+                    Us</a>
+                <a class="mx-2 py-2 px-4 rounded-full hover:bg-darkblue hover:text-white" th:href="@{/contact}">Contact
+                    Us</a>
+                <a class="mx-2 py-2 px-4 rounded-full hover:bg-darkblue hover:text-white" th:href="@{/login}">Login</a>
+                <a class="mx-2 py-2 px-4 rounded-full hover:bg-darkblue hover:text-white" th:href="@{/signup}">Sign
+                    Up</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!--content section-->
+<div th:replace="${content}"/>
+
+<!--footer section-->
+<footer>
+    <section class="bg-blue">
+        <!-- flex container -->
+        <div class="container flex flex-col-reverse px-6 py-10 text-white mx-auto space-y-6 md:flex-row md:space-y-0">
+            <div></div>
+            <!-- logo -->
+            <div class="flex flex-row mx-auto text-3xl md:mx-0">
+                <iconify-icon class="pt-1 mx-2" icon="bxs:contact"></iconify-icon>
+                <p class="font-bold">Tele-Book</p>
+            </div>
+            <!-- link section -->
+            <div class="flex justify-around space-x-28 md:mx-24">
+                <div class="flex flex-col space-y-3">
+                    <a class="hover:text-landing" th:href="@{/}">Home</a>
+                    <a class="hover:text-landing" th:href="@{/about}">About Us</a>
+                    <a class="hover:text-landing" th:href="@{/contact}">Contact Us</a>
+                </div>
+                <div class="flex flex-col space-y-3">
+                    <a class="hover:text-landing" th:href="@{/signup}">Sign Up</a>
+                    <a class="hover:text-landing" th:href="@{/login}">Login</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- copyright & developer -->
+    <section class="bg-darkblue">
+        <div class="container flex flex-row mx-auto text-white py-2 justify-center">
+            <iconify-icon class="pt-1 mx-2" icon="ic:outline-developer-mode"></iconify-icon>
+            <p>Only for Project Purpose. Developed By - Sundeep Gupta</p>
+        </div>
+    </section>
+</footer>
+
+</body>
+<script th:src="@{/js/script.js}"></script>
+<script src="https://code.iconify.design/iconify-icon/1.0.0/iconify-icon.min.js"></script>
+</html>

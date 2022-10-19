@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en"
+      th:replace="user/userbase::template(~{::title}, ~{::div})"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${title} + ' Page : Tele-Book'"></title>
+</head>
+<body>
+<div>
+    <section>
+        <!-- modal section -->
+        <div class="container w-full flex flex-col mx-auto px-4 mt-20 mb-8 space-y-0 md:space-y-0">
+            <div class="flex justify-center items-center w-full h-full">
+                <div class="flex flex-col w-3/4 md:w-2/3 lg:w-3/5 bg-white border border-slate-300 shadow-lg rounded-lg">
+                    <div class="w-full text-center rounded-t-lg py-2 text-white font-bold text-xl bg-darkblue">CHANGE
+                        PASSWORD
+                    </div>
+
+                    <form class="flex flex-col p-6 mx-auto w-full rounded-lg space-y-3 md:space-y-6 md:w-4/5"
+                          method="post"
+                          th:action="@{/people/change-password}"
+                          th:object="${passwordHelper}">
+                        <!-- Password -->
+                        <div class="flex flex-col md:justify-between md:flex-row">
+                            <label class="block text-sm text-gray-700 md:py-2 lg:font-bold after:content-['*'] after:ml-0.5 after:text-red-500"
+                                   for="oldPassword">Old Password</label>
+                            <div class="w-full flex flex-col md:w-2/3">
+                                <input autocomplete="oldPassword" class="rounded-lg shadow-sm" id="oldPassword" name="oldPassword"
+                                       th:classappend="${#fields.hasErrors('oldPassword')
+                                   ?'border-pink-500 text-pink-600 focus:border-pink-500 focus:ring-pink-500'
+                                   :'border-gray-300 focus:border-blue focus:ring-blue'}"
+                                       type="password">
+                                <div class="text-pink-600"
+                                     th:each="e: ${#fields.errors('oldPassword')}">
+                                    <span th:text="${e}"/>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- New Password -->
+                        <div class="flex flex-col md:justify-between md:flex-row">
+                            <label class="block text-sm text-gray-700 md:py-2 lg:font-bold after:content-['*'] after:ml-0.5 after:text-red-500"
+                                   for="newPassword">New Password</label>
+                            <div class="w-full flex flex-col md:w-2/3">
+                                <input autocomplete="newPassword" class="rounded-lg shadow-sm" id="newPassword" name="newPassword"
+                                       th:classappend="${#fields.hasErrors('newPassword')
+                                   ?'border-pink-500 text-pink-600 focus:border-pink-500 focus:ring-pink-500'
+                                   :'border-gray-300 focus:border-blue focus:ring-blue'}"
+                                       type="password">
+                                <div class="text-pink-600"
+                                     th:each="e: ${#fields.errors('newPassword')}">
+                                    <span th:text="${e}"/>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Confirm Password -->
+                        <div class="flex flex-col md:justify-between md:flex-row">
+                            <label class="block text-sm text-gray-700 md:py-2 lg:font-bold after:content-['*'] after:ml-0.5 after:text-red-500"
+                                   for="rePassword">Confirm Password</label>
+                            <div class="w-full flex flex-col md:w-2/3">
+                                <input autocomplete="rePassword" class="w-full rounded-lg shadow-sm" id="rePassword" name="rePassword"
+                                       th:classappend="${#fields.hasErrors('rePassword')
+                                   ?'border-pink-500 text-pink-600 focus:border-pink-500 focus:ring-pink-500'
+                                   :'border-gray-300 focus:border-blue focus:ring-blue'}"
+                                       type="password">
+                                <div class="text-pink-600"
+                                     th:each="e: ${#fields.errors('rePassword')}">
+                                    <span th:text="${e}"/>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- submit button -->
+                        <div class="flex flex-row space-x-3 w-full">
+                            <button class="w-1/2 flex justify-center py-2 px-2 mb-3 border border-transparent rounded-lg shadow-sm text-sm font-bold text-white bg-blue hover:bg-darkblue md:px-4"
+                                    type="submit">Change
+                            </button>
+                            <a class="w-1/2 text-center py-2 px-4 mb-3 border border-transparent rounded-lg shadow-sm text-sm font-bold text-white bg-contactreddark hover:bg-contactred"
+                               th:href="@{/user/settings}">
+                                Cancel
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+</body>
+</html>

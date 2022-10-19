@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en"
+      th:replace="user/userbase::template(~{::title}, ~{::div})"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${title} + ' Page : Tele-Book'"></title>
+</head>
+<body>
+<div>
+    <!-- Content Section -->
+    <section id="content">
+        <div class="container w-full flex flex-col mx-auto px-4 mt-16 space-y-0 md:space-y-0 divide-y divide-gray-500">
+
+            <!-- heading -->
+            <div class="w-full mx-auto py-5 font-bold text-3xl text-left md:text-4xl md:text-center">
+                Welcome <span th:text="${user.name}"/>
+            </div>
+
+            <!-- Error or success message -->
+            <div class="flex flex-row justify-between alert"
+                 id="message_box"
+                 th:classappend="'alert-' + ${session.message.type} + ' text-' + ${session.message.type}"
+                 th:if="${session.message}">
+                <span th:text="${session.message.content}"></span>
+                <th:block th:text="${#session.removeAttribute('message')}"></th:block>
+                <div class="cursor-pointer" onclick="message_close()">
+                    <iconify-icon class="text-2xl" icon="ci:close-big"/>
+                </div>
+            </div>
+
+            <!-- contact -->
+            <div class="flex flex-col space-y-5">
+                <div class="w-full mx-auto pt-5 font-bold text-2xl text-left">
+                    Contact Manager
+                </div>
+                <div class="flex flex-row space-x-5">
+                    <div class="flex flex-col space-y-1 mx-5 mb-5">
+                        <a th:href="@{/user/new}">
+                            <iconify-icon
+                                    class="text-[50px] w-[65px] p-2 mx-2 bg-blue text-white rounded-lg hover:bg-darkblue cursor-pointer"
+                                    icon="akar-icons:person-add">
+                            </iconify-icon>
+                        </a>
+                        <p class="text-sm font-bold">New Contact</p>
+                    </div>
+                    <div class="flex flex-col space-y-1 mb-5">
+                        <a th:href="@{/user/show}">
+                            <iconify-icon
+                                    class="text-[50px] w-[65px] p-2 mx-2 bg-blue text-white rounded-lg hover:bg-darkblue cursor-pointer"
+                                    icon="bx:show">
+                            </iconify-icon>
+                        </a>
+                        <p class="text-sm font-bold">Show Contact</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- acocunt -->
+            <div class="flex flex-col space-y-5">
+                <div class="w-full mx-auto pt-5 font-bold text-2xl text-left">
+                    Account Manager
+                </div>
+                <div class="flex flex-row space-x-5">
+                    <div class="flex flex-col space-y-1 mx-5 mb-5">
+                        <a th:href="@{/user/settings}">
+                            <iconify-icon
+                                    class="text-[50px] w-[65px] p-2 mx-2 bg-blue text-white rounded-lg hover:bg-darkblue cursor-pointer"
+                                    icon="ep:setting">
+                            </iconify-icon>
+                        </a>
+                        <p class="text-sm font-bold">User Settings</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- general -->
+            <div class="flex flex-col space-y-5">
+                <div class="w-full mx-auto pt-5 font-bold text-2xl text-left">
+                    General Information
+                </div>
+                <div class="flex flex-row space-x-5">
+                    <div class="flex flex-col space-y-1 mx-5 mb-5">
+                        <a th:href="@{/user/about}">
+                            <iconify-icon
+                                    class="text-[50px] w-[65px] p-2 mx-2 bg-blue text-white rounded-lg hover:bg-darkblue cursor-pointer"
+                                    icon="akar-icons:info">
+                            </iconify-icon>
+                        </a>
+                        <p class="text-sm font-bold mx-2">About Us</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+</body>
+</html>
